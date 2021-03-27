@@ -59,3 +59,5 @@ function game() {
     cpuScore = 0;
     numberDraws = 0;
 }
+
+game();
