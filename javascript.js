@@ -1,51 +1,42 @@
 // ROCK PAPER SCISSORS
 
-// create array with 3 options for computer
-// randomly select one of 3 options for computer
-// prompt user to select rock paper or scissors
-
-// alert cpu wins:  cpu = rock AND user = scissors  OR
-//                  cpu = scissors AND user = paper OR
-//                  cpu = paper AND user = rock
-
-// alert draw: cpu = user
-
-// else: alert user wins
-
-
+// sets initial scores to 0
 let userScore = 0;
 let cpuScore = 0;
 let numberDraws = 0;
 
- function computerPlay() {
+// randomly selects the index of an array containing options, then returns as Rock Paper or Scissors
+function computerPlay() {
      let cpuOptions = [`Rock`, `Paper`, `Scissors`];
-     return cpuOptions[Math.floor(Math.random()*(cpuOptions.length))];
+     return cpuOptions[Math.floor(Math.random() * (cpuOptions.length))];
  }
 
+// prompts user to enter their choice, converts to lowercase, then capitalizes 1st letter
 function userPlay() {
     let userInput = prompt(`Let's throw down! Enter Rock, Paper, or Scissors.`);
     let userLowerCase = userInput.toLowerCase();
     return userLowerCase.replace(userLowerCase[0], userLowerCase[0].toUpperCase());
 }
 
-
-    function playRound(playerSelection, computerSelection) {
-        if (playerSelection == computerSelection) {
-            numberDraws += 1;
-            alert(`Draw! You both threw down ${playerSelection}.`);
-        } else if   (computerSelection == `Rock` && playerSelection == `Scissors` ||
-                    computerSelection == `Scissors` && playerSelection == `Paper` ||
-                    computerSelection == `Paper` && playerSelection == `Rock`) {
-                        cpuScore += 1;
-                        alert(`You lose! ${computerSelection} beats ${playerSelection}.`);
-        } else if (playerSelection != `Rock` && playerSelection != `Scissors` && playerSelection != `Paper`) {
-            alert(`Invalid entry. Try again!`);
-        } else {
-            userScore += 1;
-            alert(`You win! ${playerSelection} beats ${computerSelection}.`);
+// plays a round of rock paper scissors and alerts user of result while also counting # of wins, losses, and draws
+function playRound(playerSelection, computerSelection) {
+    if (playerSelection == computerSelection) {
+        numberDraws += 1;
+        alert(`Draw! You both threw down ${playerSelection}.`);
+    } else if   (computerSelection == `Rock` && playerSelection == `Scissors` ||
+                computerSelection == `Scissors` && playerSelection == `Paper` ||
+                computerSelection == `Paper` && playerSelection == `Rock`) {
+        cpuScore += 1;
+        alert(`You lose! ${computerSelection} beats ${playerSelection}.`);
+    } else if (playerSelection != `Rock` && playerSelection != `Scissors` && playerSelection != `Paper`) {
+          alert(`Invalid entry. Try again!`);
+    } else {
+        userScore += 1;
+        alert(`You win! ${playerSelection} beats ${computerSelection}.`);
         }
     }
 
+// runs a game of 5 rounds and alerts the results. also resets scores for another game.
 function game() {
     for (let round = 1; round < 6; round++) {
     const playerSelection = userPlay();
@@ -64,4 +55,7 @@ function game() {
         alert(`You tied! You and the computer each won ${userScore} rounds and tied ${numberDraws} rounds.`);
     }
 
+    userScore = 0;
+    cpuScore = 0;
+    numberDraws = 0;
 }
