@@ -11,10 +11,15 @@ function computerPlay() {
      return cpuOptions[Math.floor(Math.random() * (cpuOptions.length))];
  }
 
-// prompts user to enter their choice, converts to lowercase, then capitalizes 1st letter
+// prompts user to enter their choice, converts to lowercase, validates response, returns capitalized
 function userPlay() {
     let userInput = prompt(`Let's throw down! Enter Rock, Paper, or Scissors.`);
     let userLowerCase = userInput.toLowerCase();
+        for ( ; (userLowerCase != `rock` && userLowerCase != `paper` && userLowerCase != `scissors`) ||
+            userInput == null || userInput == `` ; ) {
+              userInput = prompt(`Invalid entry. Try again! Enter Rock, Paper, or Scissors.`);
+              userLowerCase = userInput.toLowerCase();
+        }
     return userLowerCase.replace(userLowerCase[0], userLowerCase[0].toUpperCase());
 }
 
@@ -28,8 +33,6 @@ function playRound(playerSelection, computerSelection) {
                 computerSelection == `Paper` && playerSelection == `Rock`) {
         cpuScore += 1;
         alert(`You lose! ${computerSelection} beats ${playerSelection}.`);
-    } else if (playerSelection != `Rock` && playerSelection != `Scissors` && playerSelection != `Paper`) {
-          alert(`Invalid entry. Try again!`);
     } else {
         userScore += 1;
         alert(`You win! ${playerSelection} beats ${computerSelection}.`);
